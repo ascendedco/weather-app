@@ -7,6 +7,12 @@ class WeatherProvider extends ChangeNotifier implements StateManager {
   WeatherState get state => _state;
 
   @override
+  void reset() {
+    _state = WeatherState.initial();
+    notifyListeners();
+  }
+
+  @override
   void setLoading(bool loading) {
     _state = _state.copyWith(loading: loading);
     notifyListeners();
