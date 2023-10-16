@@ -1,29 +1,29 @@
 import 'package:weather_app/domain/models/models.dart';
 import 'package:weather_app/domain/state/state.dart';
 
-class AppState {
+class WeatherState {
 
   final List<WeatherPage> pages;
   final Location? currentLocation;
   final bool loading;
 
-  AppState({
+  WeatherState({
     required this.pages,
     required this.currentLocation,
     required this.loading,
   });
 
-  AppState.initial()
+  WeatherState.initial()
     : pages = [],
       currentLocation = null,
       loading = false;
 
-  AppState copyWith({
+  WeatherState copyWith({
     List<WeatherPage>? pages,
     Location? currentLocation,
     bool? loading,
   }) {
-    return AppState(
+    return WeatherState(
       pages: pages ?? this.pages,
       currentLocation: currentLocation ?? this.currentLocation,
       loading: loading ?? this.loading,
@@ -33,7 +33,7 @@ class AppState {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is AppState &&
+      other is WeatherState &&
           runtimeType == other.runtimeType &&
           pages == other.pages &&
           currentLocation == other.currentLocation &&
