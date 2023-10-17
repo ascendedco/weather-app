@@ -37,8 +37,8 @@ class HttpWeatherRepository implements WeatherRepository {
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
-      final List<dynamic> items = jsonDecode(response.body)
-          .where((i) => i['dt_txt'].contains('12:00:00'))
+      final List<dynamic> items = jsonDecode(response.body)['list']
+          .where((i) => (i['dt_txt'] as String).contains('12:00:00'))
           .toList();
 
       return items.map((e) => WeatherResponse.fromJson(e).toModel()).toList();

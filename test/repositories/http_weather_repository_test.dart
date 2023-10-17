@@ -36,5 +36,18 @@ void main() {
       expect(weather.minTemperature, isNot(equals(-100)));
       expect(weather.maxTemperature, isNot(equals(-100)));
     });
+
+    test('should return 5 forecast items', () async {
+      final forecast = await weatherRepository.getForecastForLocation(location);
+      expect(forecast.length, 5);
+    });
+
+    test('forecast items should differ by 1 day', () async {
+      final forecast = await weatherRepository.getForecastForLocation(location);
+      expect(forecast[4].date.difference(forecast[3].date), const Duration(days: 1));
+      expect(forecast[3].date.difference(forecast[2].date), const Duration(days: 1));
+      expect(forecast[2].date.difference(forecast[1].date), const Duration(days: 1));
+      expect(forecast[1].date.difference(forecast[0].date), const Duration(days: 1));
+    });
   });
 }
