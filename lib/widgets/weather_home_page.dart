@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:weather_app/dependencies.dart';
 import 'package:weather_app/domain/domain.dart';
+import 'package:weather_app/state/state.dart';
 import 'package:weather_app/widgets/widgets.dart';
 
 class WeatherHomePage extends StatefulWidget {
@@ -24,12 +26,29 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: WeatherLayoutWidget(),
+    return Scaffold(
+      body: Consumer<WeatherProvider>(
+        builder: (context, value, child) {
+          final WeatherState state = value.state;
+          return WeatherLayoutWidget(
+            page: state.pages.firstOrNull,
+            loading: state.loading,
+          );
+        },
+      ),
     );
   }
 
   _fetchWeatherData() async {
-    await _getWeatherData.execute(null);
+    try {
+      await _getWeatherData.execute(null);
+    }
+    catch (ex) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(ex.toString()),
+        ),
+      );
+    }
   }
 }
