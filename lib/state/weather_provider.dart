@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:weather_app/domain/domain.dart';
 
-class WeatherProvider extends ChangeNotifier implements StateManager {
+class WeatherProvider extends ChangeNotifier implements WeatherStateManager {
 
   WeatherState _state = WeatherState.initial();
   WeatherState get state => _state;

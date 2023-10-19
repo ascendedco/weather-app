@@ -16,7 +16,7 @@ void main() {
   GetForecast getForecast = GetForecast(getLocation: getLocation, weatherRepository: weatherRepository);
 
   // Instrument state manager
-  StateManager stateManager = WeatherProvider();
+  WeatherStateManager stateManager = WeatherProvider();
 
   group('Get Weather Data Use Case', () {
 
@@ -30,7 +30,7 @@ void main() {
         getLocation: getLocation,
         getForecast: getForecast,
         getWeather: getWeather,
-        stateManager: stateManager,
+        weatherStateManager: stateManager,
       );
 
       await getWeatherData.execute(null);
@@ -51,7 +51,7 @@ void main() {
         getLocation: getLocation,
         getForecast: getForecast,
         getWeather: getWeather,
-        stateManager: stateManager,
+        weatherStateManager: stateManager,
       );
 
       try {
