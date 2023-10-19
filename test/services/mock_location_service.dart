@@ -20,8 +20,7 @@ class MockLocationService implements LocationService {
 
   @override
   Future<Location> getCurrentLocation() async {
-    await Future.delayed(const Duration(milliseconds: 300));
-    return _location;
+    return Future.value(_location);
   }
 
   @override
